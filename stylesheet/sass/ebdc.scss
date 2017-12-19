@@ -1,0 +1,280 @@
+$color-block:#f2f2f2;
+
+body {
+     background-image: url("/image/bg.jpg");
+} 
+.top-bar {
+    background-color: #4d94ff;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: #ffffff;
+    ebkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    cursor: pointer;
+    
+    &:hover{
+        background-color: #0086b3;
+    }
+}
+.pageheader{
+  font-weight:bolder;
+  letter-spacing:0pt;
+  word-spacing:-2pt;
+  font-size:22px;
+  text-align:left;
+  font-family:arial black, sans-serif;
+  line-height:2;
+  margin-left: .5em;
+  text-shadow:  0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+.tem-box {
+    background-color:rgb(0, 134, 179);
+    margin-top:.5em;
+    min-height: 35em;
+    padding:1em;
+    color: #ffffff;
+    cursor: pointer;
+    // opacity: .9;
+}
+.c-tab{
+    background-color:#ffffff;
+    min-height: 12em;
+    color:rgb(0, 134, 179);
+    border-radius:.5em;
+    padding:1em;
+      -webkit-box-shadow: 1px 2px 18px -6px rgba(0,0,0,0.8);
+    -moz-box-shadow: 1px 2px 18px -6px rgba(0,0,0,0.8);
+    box-shadow: 1px 2px 18px -6px rgba(0,0,0,0.8);
+    margin-bottom:2em;
+    
+    /*&:hover{*/
+    /*    background-color:#4d94ff;*/
+    /*    color:#ffffff;*/
+    /*}*/
+    
+}
+
+/**
+ * 01/28/2016
+ * This pen is years old, and watching at the code after all
+ * those years made me fall from my chair, so I:
+ * - changed all IDs to classes
+ * - converted all units to pixels and em units
+ * - changed all global elements to classes or children of
+ *   .login
+ * - cleaned the syntax to be more consistent
+ * - added a lot of spaces that I so hard tried to avoid
+ *   a few years ago
+ *   (because it's cool to not use them)
+ * - and probably something else that I can't remember anymore
+ *
+ * I sticked to the same philosophy, meaning:
+ * - the design is almost the same
+ * - only pure HTML and CSS
+ * - no frameworks, preprocessors or resets
+ */
+
+/* 'Open Sans' font from Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+.login {
+ 
+  font-size: 16px;
+  margin-top: 5em;
+  cursor: pointer;
+  
+
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #28d;
+ 
+}
+
+.login-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  
+  &:hover{
+    background-color:rgb(0, 38, 77);
+    }
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+  opacity: .94;
+-webkit-box-shadow: 3px 18px 15px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 18px 15px 1px rgba(0,0,0,0.75);
+box-shadow: 3px 18px 15px 1px rgba(0,0,0,0.75);
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+  padding: 12px;
+}
+
+.login input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+  
+
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
+  border-color: #888;
+  
+}
+
+.login input[type="submit"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+ 
+    background-color:rgb(0, 38, 77);
+  
+}
+
+/* Buttons' focus effect */
+.login input[type="submit"]:focus {
+  border-color: #05a;
+}
+.panel{
+    background-color: rgb(0, 38, 77);
+    opacity: .9;
+    display: none;
+    color: #ffffff;
+    
+}
+.panel-display{
+  display:block;
+}
+.panel-tabs{
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  cursor: pointer;
+  
+  
+  &:hover{
+      background-color:#4d94ff;
+      color: #ffffff;
+    }
+}
+.page-face {
+  background-color: #0086b3;
+  padding:2em;
+  margin-top: 1em;
+  color: #ffffff;
+}
+.currency-name {
+  font-weight:bolder;
+  letter-spacing:0pt;
+  word-spacing:-2pt;
+  font-size:18px;
+  text-align:left;
+  font-family:arial black, sans-serif;
+  line-height:2;
+  margin-left: .5em;
+}
+.creport-face{
+  background-color: #f2f2f2;
+  opacity: .9;
+  
+}
+.creport-face-size{
+  color:  #000000;
+  min-height: 35em;
+  padding-top: 3em;
+  
+}
+.mylink {
+       text-decoration: none;
+       color:#ffffff; 
+       &:hover {
+       text-decoration: none;
+      color:#ffffff; 
+    }
+}
+.rate {
+  color: red;
+  font-weight:bold;
+  font-size:18px;
+}
+.whiteboox {
+  background: #ebebeb;
+  padding: 12px;
+  opacity: .94;
+  margin: 1em;
+  min-height: 10em;
+  color: #000000;
+  
+  
+}
+.tem-tiltle{
+  background-color: #00004d;
+  color: #ffffff;
+  padding:1em;
+}
+.giving {
+  background-color: rgb(153, 0, 0);
+  padding:.5em;
+  color:#ffffff;
+  margin-top:2em;
+  margin-right:2em;
+  }
+.collecting{
+  background-color: #006600;
+  padding:.5em;
+  color:#ffffff;
+  margin-top:2em;
+  margin-left:2em;
+  
+} 
+.label {
+  background-color:#47476b;
+  width:100%;
+  color:#ffffff;
+  padding:.5em;
+} 
+ 
+
