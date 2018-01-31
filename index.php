@@ -11,12 +11,13 @@
 <div ui-view="ebdcview"></div>  
 <script src="/js/jquery.js"></script>    
 <script src="/js/popper.js"></script>
+<script src="/js/priceformt.js"></script>
 <script src="/js/angularjs/angular.js"></script> 
 <script src="/js/angularjs/angularroute.js"></script>
 <script src="/js/angularjs/angularuirouter.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jqueryui.min.js"></script>
-<script src="/js/ebdc.js"></script> 
-<script src="/js/shake.js"></script> 
+<script src="/js/shake.js"></script>
+<script src="/js/ebdc.js"></script>
 </body>
 </html>

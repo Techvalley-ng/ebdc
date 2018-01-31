@@ -7,7 +7,9 @@
           <form class="login-container" id="ebdc-login" action="/#!/home" method="post">
             <p><input type="text" placeholder="Username" class="form-control" name="username"></p>
             <p><input type="password" placeholder="Password" class="form-control" name="password"></p>
+            <p><input type="text" placeholder="CenterNumber" class="form-control" name="CenterNumber"></p>
             <p><input type="submit" value="Log in" class="form-control" name="login-bt"></p>
+            <!--<img src="/image/logo.jpg" class="form-control">-->
           </form>
         </div>
     </div>

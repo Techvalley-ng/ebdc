@@ -8,19 +8,19 @@
                 Add New Curremcy
             </div>
         <div class="col">
-            <div class="dropdown">
-                 <i class="fa fa-user-o fa-2x float-right" aria-hidden="true"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div class="dropdown-item text-center text-nowrap font-weight-bold">Welcome</div>
-                    <div class="dropdown-divider font-weight-bold"></div>
-                    <div class="dropdown-item text-nowrap font-weight-bold">Username: Majiya2015</div>
-                    <div class="dropdown-item text-nowrap font-italic font-weight-normal">First name: Abdullahi</div>
-                    <div class="dropdown-item text-nowrap font-italic font-weight-normal">Last name: Majiya</div>
-                    <div class="dropdown-divider font-weight-bold"></div>
-                    <a class="dropdown-item text-nowrap font-weight-bold" href="#/">Logout</a>
-                   
-                 
-                </div>
+            <div class="dropdown float-right">
+                <a href="/#!/outgoingcash"><div class="fa fa-bell fa-2x notification" aria-hidden="true" id="noty"></div></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-user-o fa-2x" aria-hidden="true"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-item text-center text-nowrap font-weight-bold">Welcome</div>
+                                <div class="dropdown-divider font-weight-bold"></div>
+                                <div class="dropdown-item text-nowrap font-weight-bold">Username: Majiya2015</div>
+                                <div class="dropdown-item text-nowrap font-italic font-weight-normal">First name: Abdullahi</div>
+                                <div class="dropdown-item text-nowrap font-italic font-weight-normal">Last name: Majiya</div>
+                                <div class="dropdown-divider font-weight-bold"></div>
+                                <a class="dropdown-item text-nowrap font-weight-bold" href="#/">Logout</a>
+                            </div>
             </div>
         </div>
        </div>
@@ -41,14 +41,20 @@
                     <a href="/#!/matchcurrency" class="mylink">  
                     <div class="panel-tabs">Match Currency</div>
                     </a>
-                    <a href="/#!/transactionreport" class="mylink">  
-                    <div class="panel-tabs">Transaction reports</div>
+                    <a href="/#!/generalreport" class="mylink">  
+                    <div class="panel-tabs">General Reports</div>
+                    </a>
+                    <a href="/#!/transactionhistroy" class="mylink">  
+                    <div class="panel-tabs">Transaction History</div>
                     </a>
                     <a href="/#!/makedeport" class="mylink">  
                     <div class="panel-tabs">Make Deports</div>
                     </a>
                     <a href="/#!/deportsreports" class="mylink">  
-                    <div class="panel-tabs">Deports reports </div>
+                    <div class="panel-tabs">Deports Reports </div>
+                    </a>
+                    <a href="/#!/outgoingcash" class="mylink">  
+                    <div class="panel-tabs">OutGoing Cash</div>
                     </a>
                 </div>
                

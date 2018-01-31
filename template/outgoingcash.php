@@ -5,7 +5,7 @@
             <i class="fa fa-bars fa-2x" aria-hidden="true" id="menu"></i>
         </div>
             <div class="col text-nowrap pageheader">
-                Deports Reports
+                Out Going Cash
             </div>
         <div class="col">
             <div class="dropdown float-right">
@@ -56,14 +56,12 @@
                     <div class="panel-tabs">OutGoing Cash</div>
                     </a>
                 </div>
+                
+                
                  <div class="col">
                    <div class="row tem-box">
                        <div class="col whiteboox">
-                           <div class="tem-tiltle text-center font-weight-bold text-nowrap">
-                                    DEPORT REPORT
-                            </div>
-                            
-                            
+                           outgoingcash
                        </div>
                    </div>
                 </div>

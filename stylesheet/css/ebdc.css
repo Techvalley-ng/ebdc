@@ -70,7 +70,7 @@ body {
 /* 'Open Sans' font from Google Fonts */
 .login {
   font-size: 16px;
-  margin-top: 5em;
+  margin-top: 3em;
   cursor: pointer; }
 
 /* Reset top and bottom margins from certain elements */
@@ -233,5 +233,8 @@ body {
   width: 100%;
   color: #ffffff;
   padding: .5em; }
+
+.notification {
+  color: #ff471a; }
 
 /*# sourceMappingURL=ebdc.css.map */

@@ -32,7 +32,7 @@ ebdc.config(function($stateProvider, $urlRouterProvider){
 				url: '/maketransaction',
 				views: {
 				     'ebdcview': {
-				       controller: 'CreportController',     
+				       controller: 'Maketransaction',     
                        templateUrl:"/template/maketransaction.php"
                     }
                      
@@ -72,8 +72,19 @@ ebdc.config(function($stateProvider, $urlRouterProvider){
 				} 
 				
 			})
-			.state('transactionreport', {
-				url: '/transactionreport',
+			.state('generalreport', {
+				url: '/generalreport',
+				views: {
+				     'ebdcview': {
+				       controller: 'CreportController',     
+                       templateUrl:"/template/generalreport.php"
+                    }
+                     
+				} 
+				
+			})
+			.state('transactionhistroy', {
+				url: '/transactionhistroy',
 				views: {
 				     'ebdcview': {
 				       controller: 'CreportController',     
@@ -104,15 +115,30 @@ ebdc.config(function($stateProvider, $urlRouterProvider){
                      
 				} 
 				
+			})
+			.state('outgoingcash', {
+				url: '/outgoingcash',
+				views: {
+				     'ebdcview': {
+				       controller: 'CreportController',     
+                       templateUrl:"/template/outgoingcash.php"
+                    }
+                     
+				} 
+				
 			});
     
 	    
 });
+
+
+
 ebdc.controller('EbdcController', function($scope){
 	//............................................. login box ...................
 	 $("#ebdc-login").submit(function( event ) {
         	var username = $("input[name='username']").val();
         	var password = $("input[name='password']").val();
+        	var centerNumber = $("input[name='CenterNumber']").val()
         	// window.alert(username);
         	if(username == ""){
         		$('.login').shake();
@@ -128,13 +154,20 @@ ebdc.controller('EbdcController', function($scope){
         		$("input[name='password']").focus();
         		event.preventDefault();	
         	}
+        	else if(centerNumber == ""){
+        		$('.login').shake();
+        		$(".login-header").css("background-color","#cc0000");
+        		$(".login-header").html("CenterNumber error");
+        		$("input[name='CenterNumber']").focus();
+        		event.preventDefault();
+        	}
         	else {
-        		if((username=="Majiya") && (password="Majiya")){
+        		if((username=="Majiya") && (password=="Majiya") && (centerNumber=="2308")){
         				
         		}
         		else{
         			$('.login').shake();
-        			$(".login-header").html("data error");
+        			$(".login-header").html("information error");
         			event.preventDefault();	
         		}
         	}
@@ -145,22 +178,39 @@ ebdc.controller('EbdcController', function($scope){
     
      $(document).click(function(e){
 		    var result = e.target.tagName.toLowerCase();
+		    var attrdata = $(result).attr('id');
 		    // var cureentlocation = window.location.href;
-		    if(result=="i"){
+		    if(attrdata=="menu"){
 		     $(".panel").addClass("panel-display");
+		     
 		    
 		    } else {
-		         $(".panel").removeClass("panel-display")
+		        $(".panel").removeClass("panel-display")
+		        
 		    }
 	}); 
      
         
 });
 
-ebdc.controller('CreportController', function($scope){
-	// window.alert("welcome to currency report center");
+ebdc.controller('Maketransaction', function($scope){
+	 $(document).click(function(e){
+		    var result = e.target.tagName.toLowerCase();
+		    var attrdata = $(result).attr('id');
+		    // var cureentlocation = window.location.href;
+		    if(attrdata=="menu"){
+		     $(".panel").addClass("panel-display");
+		     
+		    
+		    } else {
+		        $(".panel").removeClass("panel-display")
+		        
+		    }
+	}); 
+	
+//formatting the price
+	 $scope.collecting=0;
+	 $scope.rate=360;
 });
-
-
 
 
