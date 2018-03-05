@@ -8,16 +8,32 @@
 <title>EBDC</title>
 </head>
 <body ng-app="Ebdcapp">
-<div ui-view="ebdcview"></div>  
+    
+<div ui-view="login">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <br><br><br><br><br><br><br><br>
+                <img src="image/Preloader_3.gif" class="img-fluid img-thumbnail rounded mx-auto d-block"></img>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ui-view="topbar"></div>
+<div ui-view="pagedata"></div>
+
+
 <script src="/js/jquery.js"></script>    
 <script src="/js/popper.js"></script>
-<script src="/js/priceformt.js"></script>
 <script src="/js/angularjs/angular.js"></script> 
 <script src="/js/angularjs/angularroute.js"></script>
 <script src="/js/angularjs/angularuirouter.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jqueryui.min.js"></script>
 <script src="/js/shake.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/angularjs/ebdc_angular.js"></script>
 <script src="/js/ebdc.js"></script>
 </body>
 </html>

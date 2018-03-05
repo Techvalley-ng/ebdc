@@ -1,216 +1,130 @@
-// JavaScript File
-//............................... SETING UP ANGULAR JS ..................
-var ebdc = angular.module('Ebdcapp', ['ui.router']);
-
-ebdc.config(function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise("/login");
-    $stateProvider
- 
-			.state('login', {
-				url: '/login',
-				views: {
-				     'ebdcview': {
-				        controller: 'EbdcController', 
-                       templateUrl:"/template/login.php"
-                    }
-                    
-				}
-				
-			})
-			.state('home', {
-				url: '/home',
-				views: {
-				     'ebdcview': {
-				       controller: 'EbdcController',     
-                       templateUrl:"/template/controller.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('maketransaction', {
-				url: '/maketransaction',
-				views: {
-				     'ebdcview': {
-				       controller: 'Maketransaction',     
-                       templateUrl:"/template/maketransaction.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('c_report', {
-				url: '/creport',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/c_report.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('addcurrency', {
-				url: '/addcurrency',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/addcurrency.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('matchcurrency', {
-				url: '/matchcurrency',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/matchcurrency.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('generalreport', {
-				url: '/generalreport',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/generalreport.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('transactionhistroy', {
-				url: '/transactionhistroy',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/transactionreport.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('makedeport', {
-				url: '/makedeport',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/makedeport.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('deportsreports', {
-				url: '/deportsreports',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/deportreport.php"
-                    }
-                     
-				} 
-				
-			})
-			.state('outgoingcash', {
-				url: '/outgoingcash',
-				views: {
-				     'ebdcview': {
-				       controller: 'CreportController',     
-                       templateUrl:"/template/outgoingcash.php"
-                    }
-                     
-				} 
-				
-			});
-    
-	    
-});
-
-
-
-ebdc.controller('EbdcController', function($scope){
+function login (errorcode=0){
 	//............................................. login box ...................
-	 $("#ebdc-login").submit(function( event ) {
-        	var username = $("input[name='username']").val();
-        	var password = $("input[name='password']").val();
-        	var centerNumber = $("input[name='CenterNumber']").val()
-        	// window.alert(username);
-        	if(username == ""){
-        		$('.login').shake();
-        		$(".login-header").css("background-color","#cc0000");
-        		$(".login-header").html("username error");
-        		$("input[name='username']").focus();
-        		event.preventDefault();
-        	}
-        	else if(password==""){
-        		$('.login').shake();
-        		$(".login-header").css("background-color","#cc0000");
-        		$(".login-header").html("password error");
-        		$("input[name='password']").focus();
-        		event.preventDefault();	
-        	}
-        	else if(centerNumber == ""){
-        		$('.login').shake();
-        		$(".login-header").css("background-color","#cc0000");
-        		$(".login-header").html("CenterNumber error");
-        		$("input[name='CenterNumber']").focus();
-        		event.preventDefault();
-        	}
-        	else {
-        		if((username=="Majiya") && (password=="Majiya") && (centerNumber=="2308")){
-        				
-        		}
-        		else{
-        			$('.login').shake();
-        			$(".login-header").html("information error");
-        			event.preventDefault();	
-        		}
-        	}
-        });
-        
-        
-     //............................................. login box ................... 
-    
-     $(document).click(function(e){
-		    var result = e.target.tagName.toLowerCase();
-		    var attrdata = $(result).attr('id');
-		    // var cureentlocation = window.location.href;
-		    if(attrdata=="menu"){
-		     $(".panel").addClass("panel-display");
-		     
-		    
-		    } else {
-		        $(".panel").removeClass("panel-display")
-		        
-		    }
-	}); 
-     
-        
-});
+	// $.validator.addMethod("numberwithdass", function(value, element) {
+	// 	  return this.optional(element) || value == value.match(/^[\d]*$/);
+	// });
+	$.validator.addMethod("center_vall", function(value, element) {
+   
+     return this.optional(element) || /^\d{4}-\d{4}-\d{4}$/.test(value);
 
-ebdc.controller('Maketransaction', function($scope){
-	 $(document).click(function(e){
-		    var result = e.target.tagName.toLowerCase();
-		    var attrdata = $(result).attr('id');
-		    // var cureentlocation = window.location.href;
-		    if(attrdata=="menu"){
-		     $(".panel").addClass("panel-display");
-		     
-		    
-		    } else {
-		        $(".panel").removeClass("panel-display")
-		        
-		    }
-	}); 
+    });
 	
-//formatting the price
-	 $scope.collecting=0;
-	 $scope.rate=360;
-});
+	$("#ebdclogin").validate({
+		
+		onkeyup: false,
+		onfocusout: false,
+		focusInvalid: false,
+		focusCleanup: true,
+		rules: {
+			username: {
+				required: true,
+				minlength: 6
+			},
+			password: {
+				required: true,
+				minlength: 8
+			},
+			CenterNumber:{
+				required: true,
+				minlength: 12,
+				center_vall: true
+				
+			}
+		},
+		showErrors: function(errorMap, errorList) {
+			var  filederror = Object.keys(errorMap);
+			var i = 0;
+			var length_data = filederror.length;
+			if(length_data>0){
+				$(".login-header").html("Entry Error").css("background-color","#cc0000");
+			}
+			while (i <= length_data) {
+				
+				$("input[name='"+filederror[i]+"']").css("border-color","#cc0000");
+				i++;
+			}	
+			// this.defaultShowErrors();
+			
+			// window.alert(length_data);
+		
+		}
+	});
+        
+       //login fialed eror code is 4044
+       if(errorcode==4044){
+       			$('.login').shake();
+        		$(".login-header").html("Login failed").css("background-color","#cc0000");
+        		
+       }
+       else if(errorcode==2202){
+                
+        		$(".login-header").html("Logout successful").css("background-color","#cc0000");
+        		$('.login').shake();
+        		
+        		
+        		
+       }
+    setTimeout(function(){
+    	$(".login-header").html("ebdc MIS").css("background-color","#28d");
+    }, 10000);   
+}
 
+
+function menuclick (){
+      $(document).click(function(e){
+		    var result = e.target.tagName.toLowerCase();
+		    var attrdata = $(result).attr('id');
+		    // var cureentlocation = window.location.href;
+		    if(attrdata=="menu"){
+		     $(".panel").addClass("panel-display");
+		    
+		    } else {
+		        $(".panel").removeClass("panel-display")
+		        
+		    }
+	});
+}
+
+
+
+function askonsubmit(submitid,massage) {
+	$(submitid).submit(function( event ) {
+		if(confirm(massage)){
+			
+		}else{
+			event.preventDefault();
+		}
+	});
+	
+}
+
+function codecheck(code){
+	if(code==""){
+		//window.alert("new click");
+	}
+	else if(code==2172018){
+		window.alert("transaction was successfull");
+	}
+	else if(code==2172020){
+		window.alert("Transaction Error!!!!!");	
+	}else if(code==2172021){
+		window.alert("Transaction Error!!!!!: Account Is Balanced");	
+	}else if(code==2172022){
+		window.alert("Transaction Error!!!!!: Insufficient Money");	
+	}else if(code==7342018){
+		window.alert("Error 7342018");		
+	}else if (code== 5555){
+		$(".tem-tiltle").html("YOU HAVE SUCCESSFULLY ADD A NEW CURRENCY").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}else if (code== 5557){
+		$(".tem-tiltle").html("YOU HAVE AN ERROR WHILE ADDING A NEW CURRENCY").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}
+}
+
+function resetstyle(wsalect,htmldata,bgcolor){
+	setTimeout(function(){
+    	$(wsalect).html(htmldata).css("background-color",bgcolor);
+    }, 10000); 
+}
 

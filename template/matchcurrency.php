@@ -1,32 +1,3 @@
-<div class="container-fluid top-bar">
-    <div class="col-md-12">
-       <div class="row">
-        <div class="col">
-            <i class="fa fa-bars fa-2x" aria-hidden="true" id="menu"></i>
-        </div>
-            <div class="col text-nowrap pageheader">
-                Match Transaction
-            </div>
-        <div class="col">
-            <div class="dropdown float-right">
-                <a href="/#!/outgoingcash"><div class="fa fa-bell fa-2x notification" aria-hidden="true" id="noty"></div></a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-user-o fa-2x" aria-hidden="true"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-item text-center text-nowrap font-weight-bold">Welcome</div>
-                                <div class="dropdown-divider font-weight-bold"></div>
-                                <div class="dropdown-item text-nowrap font-weight-bold">Username: Majiya2015</div>
-                                <div class="dropdown-item text-nowrap font-italic font-weight-normal">First name: Abdullahi</div>
-                                <div class="dropdown-item text-nowrap font-italic font-weight-normal">Last name: Majiya</div>
-                                <div class="dropdown-divider font-weight-bold"></div>
-                                <a class="dropdown-item text-nowrap font-weight-bold" href="#/">Logout</a>
-                            </div>
-            </div>
-        </div>
-       </div>
-    </div>
-</div>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -72,7 +43,8 @@
                                    <div class="form-group" style="margin-top:2em;">
                                         <label class="label" for="Customername">Select Selling Currency</label>
                                             <select name="currency" class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control-lg form-control">
-                                            <option value="USD">Select Currency</option>
+                                            <option ng-repeat="currency_list in currency_list | limitTo:8 | orderBy:'-data_added'" value="">Select Currency</option>
+                                            <option value="one">{{currency_list.name}}</option>
                                             </select> 
                                     </div>
                                         <h4 align="center">VS</h4>
@@ -85,13 +57,7 @@
                               </div>
                               
                               <div class="col-md-6">
-                                  <div class="form-group" style="margin-top:2em;">
-                                        <label class="label" for="Customername">Opening Balance</label>
-                                        <div class="input-group mb-2 mb-sm-0">
-                                        <div class="input-group-addon">USD Opening</div>
-                                        <input type="text" class="form-control form-control-lg" name="Customername" value="40,000.00"> 
-                                        </div>
-                                    </div>
+                                  
                                     <h4>&nbsp;</h4>
                                     <div class="form-group" style="margin-top:2em;">
                                       <button type="submit" style="cursor:pointer" class="btn btn-primary btn-block btn-lg">Match Currency</button>

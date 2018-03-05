@@ -1,0 +1,7 @@
+<div class="form-group" style="margin-top:2em;">
+                                        <label class="label" for="Customername">Opening Balance</label>
+                                        <div class="input-group mb-2 mb-sm-0">
+                                        <div class="input-group-addon">USD Opening</div>
+                                        <input type="text" class="form-control form-control-lg" name="Customername" value="40,000.00"> 
+                                        </div>
+                                    </div>

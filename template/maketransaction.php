@@ -1,38 +1,10 @@
-<div class="container-fluid top-bar">
-    <div class="col-md-12">
-       <div class="row">
-        <div class="col">
-            <i class="fa fa-bars fa-2x" aria-hidden="true" id="menu"></i>
-        </div>
-            <div class="col text-nowrap pageheader">
-                Transaction For USD TO NGN
-            </div>
-        <div class="col">
-            <div class="dropdown float-right">
-                <a href="/#!/outgoingcash"><div class="fa fa-bell fa-2x notification" aria-hidden="true" id="noty"></div></a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-user-o fa-2x" aria-hidden="true"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div class="dropdown-item text-center text-nowrap font-weight-bold">Welcome</div>
-                                <div class="dropdown-divider font-weight-bold"></div>
-                                <div class="dropdown-item text-nowrap font-weight-bold">Username: Majiya2015</div>
-                                <div class="dropdown-item text-nowrap font-italic font-weight-normal">First name: Abdullahi</div>
-                                <div class="dropdown-item text-nowrap font-italic font-weight-normal">Last name: Majiya</div>
-                                <div class="dropdown-divider font-weight-bold"></div>
-                                <a class="dropdown-item text-nowrap font-weight-bold" href="#/">Logout</a>
-                            </div>
-            </div>
-        </div>
-       </div>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col panel">
-                    <a href="/#!/home" class="mylink">  
+                    <a href="/#!/home/Dashboard" class="mylink">  
                     <div class="panel-tabs">Dashboard</div>
                     </a>
                     <a href="/#!/addcurrency" class="mylink">  
@@ -57,64 +29,76 @@
                     <div class="panel-tabs">OutGoing Cash</div>
                     </a>
                 </div>
-                
                 <div class="col">
                    <div class="row tem-box">
                        <div class="col whiteboox">
-                           
-                                 <div class="tem-tiltle text-center font-weight-bold text-nowrap">
-                                   Enter Customer Information
+                           <form name="maketransaction" id="maketransaction" action="severside/post/processtransacton.php" method="POST">
+                               <div class="tem-tiltle text-center font-weight-bold text-nowrap">
+                                   Enter Customer Information To Make Transaction: 
+                                   <br>
+                                   FOR
+                                   {{incoming}} (Customer) TO {{outgoing}} (Company)
                                 </div>
-                        
-                             <div class="row">
+                                <div class="row">
                                  <div class="col giving text-left text-nowrap font-weight-bold">
-                                     You are Collecting in: <span>$</span> <span id="ct">{{collecting | currency :"":0 }}</span>
+                                     You are Collecting in: <span>{{incoming}}</span> <span id="ct">{{collecting | currency :"":0 }}</span>
                                       
                                  </div>
                                  <div class="col collecting text-right text-nowrap font-weight-bold">
-                                      You are giving out : <span>N</span> <span>{{collecting*rate | currency :"":0 }}</span>
+                                      You are giving out : <span>{{outgoing}}</span> <span>{{collecting/rate | currency :"":0 }}</span>
                                  </div>
                              </div>
-                             <div class="row">
-                              <div class="col-md-6">
-                                  
-                                  <div class="form-group" style="margin-top:2em;">
-                                    <label class="label" for="Customername">Enter Customer Name</label>
-                                    <input type="text" class="form-control form-control-lg" name="Customername"  placeholder="Customer name" required>
-                                  </div>
-                                  
-                              </div>
                               
-                              <div class="col-md-6">
-                                  
-                                  <div class="form-group" style="margin-top:2em;">
-                                    <label class="label" for="Amount">Enter Transaction Amount</label>
-                                    <input type="number" blur-to-currency class="form-control form-control-lg" name="Amount" ng-model="collecting"  placeholder="Amount" format="currency" >
-                                  </div>
-                                  
-                              </div>
-                             
-                             </div>
-                             
-                             <div class="row">
-                                 <div class="col-md-12">
-                                     <label class="label text-center text-nowrap font-weight-bold" for="Rate">Enter Exchange rate</label>
-                                     <div class="input-group mb-2 mb-sm-0">
-                                        <div class="input-group-addon">1 USD IS</div>
-                                        <input type="text" class="form-control form-control-lg" name="rate"  ng-model="rate" placeholder="Enter Rate">
+                           
+                           <div class="row">
+                               <div class="col">
+                                       <div class="form-group" style="margin-top:2em;">
+                                        <label class="label" for="Customername">Enter Transaction Type</label>
+                                        <select class="form-control form-control-lg"name="type">
+                                            <option value="Cash">Cash</option>
+                                            <option value="Transfer">Transfer</option>
+                                        </select>
                                       </div>
-                                 </div>
-                             </div>
-                             <br>
-                              <div class="row">
-                                  <div class="col-md-6">
+                               </div>
+                               
+                               <div class="col">
+                                   <div class="form-group" style="margin-top:2em;">
+                                        <label class="label" for="Customername">Enter Customer Name</label>
+                                        <input type="text" class="form-control form-control-lg" name="Customername"  placeholder="Customer name" required>
+                                      </div>
+                               </div>
+                           </div>
+                           
+                           <div class="row">
+                               <div class="col">
+                                   <div class="form-group">
+                                    <label class="label" for="Amount">Enter Transaction Amount: {{incoming}}</label>
+                                    <input type="number"  class="form-control form-control-lg" name="Amount" ng-model="collecting"  format="currency">
+                                  </div>
+                               </div>
+                               
+                               <div class="col">
+                                   <label class="label text-center text-nowrap font-weight-bold" for="Rate">Enter Exchange rate</label>
+                                     <div class="input-group mb-2 mb-sm-0">
+                                        <div class="input-group-addon">1 {{outgoing}} IS</div>
+                                        <input type="text" class="form-control form-control-lg" name="rate"  ng-model="rate">
+                                      </div>
+                               </div>
+                           </div>
+                           
+                           <div class="row">
+                               <div class="col-md-6">
                                       <button type="submit" style="cursor:pointer" class="btn btn-primary btn-block btn-lg">Make Transaction</button>
                                   </div>
                                   <div class="col-md-6">
-                                      <button type="button" style="cursor:pointer" class="btn btn-primary btn-block btn-lg">Cancle Transaction</button>
+                                      <a href="/#!/home/Dashboard">
+                                      <button type="Reset" style="cursor:pointer" class="btn btn-danger btn-block btn-lg">Cancle Transaction</button>
+                                      </a>
                                   </div>
-                              </div>
-                              
+                           </div>
+                               <input type="hidden" name="deport_id" value="{{deport_id}}">
+                               <input type="hidden" name="url" value="#!/maketransaction/{{deport_id}}/{{outgoing}}/{{incoming}}/">
+                           </form>
                        </div>
                    </div>
                 </div>
