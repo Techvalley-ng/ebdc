@@ -1,0 +1,63 @@
+<div ng-controller="Makedeposit">
+<div class="row">
+    <div class="col-md-12">
+        <div class="tem-tiltle text-center font-weight-bold text-nowrap">
+            Check Out And Check In For: {{deposit_analysis_data.martch_code}} TO {{deposit_analysis_data.martch_incomingcode}} 
+        </div>
+    </div>
+</div>
+                            
+<div class="row">
+    <div class="col">
+        <div class="giving text-left text-nowrap font-weight-bold">
+             Check out old transaction
+        </div>
+    <br>
+        <table class="table table table-dark table-striped table-sm table-responsive-sm table-hover">
+            <tr>
+                <th scope="col">Opening Balance:</th>
+                <th scope="col"> {{deposit_analysis_data.openingbalance | currency: deposit_analysis_data.martch_symbol +" ":0}} </th>
+            </tr>
+            <tr>
+                <th scope="col">Current Balance:</th>
+                <th scope="col"> {{deposit_analysis_data.balance | currency: deposit_analysis_data.martch_symbol +" ":0}} </th>
+            </tr>
+            <tr>
+                <th scope="col">Transaction Made:</th>
+                <th scope="col">{{deposit_analysis_data.transaction_made | currency: deposit_analysis_data.martch_symbol +" ":0}}</th>
+            </tr>
+        </table>   
+        <form method="post" action="severside/post/checkout.php" name="checkoutform" id="checkout" >
+            <input type="hidden" name="currencydeposit_id" value="{{deposit_analysis_data.deposite_id}}" class="test"/>
+            <input type="hidden" name="currencymatch" value="{{deposit_analysis_data.martch_code}} VS {{deposit_analysis_data.martch_incomingcode}}"/>
+            <input type="hidden" name="amount" value="{{deposit_analysis_data.balance}}"/>
+            <input type="hidden" name="symbol" value="{{deposit_analysis_data.martch_symbol}}"/>
+            <button type="submit" class="btn btn-danger form-control">Check Out (Old Deport)</button>
+        </form>
+    </div>
+<div class="col">
+    <div class=" collecting text-right text-nowrap font-weight-bold">
+        Check in new transaction 
+    </div>
+     <form method="post" action="severside/post/checkin.php" name="checkoutform" id="checkin" >
+            <input type="hidden" name="currencydeposit_id" value="{{deposit_analysis_data.deposite_id}}"/>
+            <input type="hidden" name="currencymatch" value="{{deposit_analysis_data.martch_code}} VS {{deposit_analysis_data.martch_incomingcode}}"/>
+            <input type="hidden" name="martch_id" value="{{deposit_analysis_data.martch_id}}"/>
+            <input type="hidden" name="symbol" value="{{deposit_analysis_data.martch_symbol}}"/>
+            
+        
+    <div class="form-group" style="margin-top:2em">
+        <label class="label" for="Customername">Enter Opening Balance</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div class="input-group-addon"> {{deposit_analysis_data.martch_code }}</div>
+                    <input type="text" class="form-control form-control-lg" name="amount" value="0">
+            </div>
+    </div>
+        
+        <button type="submit" class="btn btn-danger form-control">Check in</button>
+    </form>    
+</div>
+</div>
+</div>
+
+

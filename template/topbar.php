@@ -1,3 +1,6 @@
+<div class="d-none" id="accesserrorcode">
+    <?php require_once('../severside/access/accessprotocol.php'); ?>
+</div>
 <div class="container-fluid top-bar">
     <div class="col-md-12">
        <div class="row">
@@ -5,12 +8,12 @@
             <i class="fa fa-bars fa-2x" aria-hidden="true" id="menu"></i>
         </div>
             <div class="col text-nowrap pageheader">
-                {{pagename}}
+                {{pagename}} : {{userinfo.centername | uppercase}}
             </div>
         <div class="col">
             
             <div class="dropdown float-right">
-                <a href="/#!/outgoingcash"><div class="fa fa-bell fa-2x notification" aria-hidden="true" id="noty"></div></a>
+                <a href="/#!/loan/Cash On Loan/"><div class="fa fa-bell fa-2x notification" aria-hidden="true" id="noty"></div></a>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-user-o fa-2x" aria-hidden="true"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

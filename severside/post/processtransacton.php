@@ -33,36 +33,59 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 
-$today= date ("Y-m-d");
-$location = $_SERVER['SERVER_NAME']."/".$_POST['url'];
-$customermoney = $_POST['Amount']/$_POST['rate'];
+$today            = date ("Y-m-d");
+$location         = $_SERVER['SERVER_NAME']."/".$_POST['url'];
+$customermoney    = $_POST['Amount']/$_POST['rate'];
+$MM_Centernumber  = $_SESSION['MM_Centernumber'];
+$MM_Username      = $_SESSION['MM_Username'];
+$deport_id        = $_POST['deport_id'];
 
 //validation for money avallabilty
-$datatocheck="Transfar";
+$datatocheck="Transfer";
 mysql_select_db($database_ebdc, $ebdc);
-$query_tabs = "SELECT SUM(transaction.amount) AS transaction_made, (deposit.amount) AS openingbalance, (deposit.amount-SUM(transaction.amount)) AS balance, currency.name, (SELECT currency.code from currency where currency.currency_id = marched_currency.currency_id_incoming) AS incoming, (currency.code) AS outgoing,currency.symbol, (deposit.id) AS deposit_id, (transaction.id) AS transaction_id FROM `transaction`, deposit, marched_currency, `currency`, center WHERE `transaction`.deposit_id = deposit.id AND marched_currency.marched_id = deposit.marched_id AND marched_currency.currency_id_outgoing = `currency`.currency_id AND `currency`.center_id = center.id AND center.`number`=".$_SESSION['MM_Centernumber']." AND transaction.tran_type!='$datatocheck' AND deposit.id=".$_POST['deport_id']." GROUP BY `transaction`.deposit_id";
-$tabs = mysql_query($query_tabs, $ebdc) or die(mysql_error());
-$row_tabs = mysql_fetch_assoc($tabs);
-$totalRows_tabs = mysql_num_rows($tabs);
+$query_check_transaction_balance = "SELECT (`transaction`.amount) AS transaction_made,
+(deposit.amount) AS openingbalance, 
+(deposit.amount-SUM(`transaction`.amount)) AS balance
+FROM ebdc.`transaction`, ebdc.deposit, ebdc.staff, ebdc.center
+WHERE `transaction`.deposit_id = deposit.id
+AND `transaction`.staff_id = staff.staff_id
+AND staff.center_id = center.id
+AND `transaction`.deposit_id = '$deport_id'
+AND center.`number` = '$MM_Centernumber'
+AND `transaction`.tran_type != 'Transfer'
+GROUP BY `transaction`.deposit_id";
+$check_transaction_balance = mysql_query($query_check_transaction_balance, $ebdc) or die(mysql_error());
+$row_check_transaction_balance = mysql_fetch_assoc($check_transaction_balance);
+$totalRows_check_transaction_balance = mysql_num_rows($check_transaction_balance);
 
-if($totalRows_tabs==1){
-  //working fine
-  $transaction_made = $row_tabs['transaction_made'];
-  $openingbalance = $row_tabs['openingbalance'];
-  $balance = $row_tabs['balance'];
-  
-  if($openingbalance==$transaction_made){
-    header(sprintf("Location: %s", "https://".$location."2172021"));
-  }
-  else if($customermoney > $openingbalance){
-    header(sprintf("Location: %s", "https://".$location."2172022"));
-  }
-  else if(($openingbalance==$balance) || ($customermoney<$openingbalance) || ($customermoney==$balance)){
-       $insertSQL = sprintf("INSERT INTO `transaction` (deposit_id, username, customer_name, amount, rate, tran_type, transaction_date) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+mysql_select_db($database_ebdc, $ebdc);
+$query_getting_staffid      = "SELECT staff.staff_id 
+FROM ebdc.staff, ebdc.center  
+WHERE username='$MM_Username' AND staff.center_id=center.id AND center.number='$MM_Centernumber'";
+$getting_staffid            = mysql_query($query_getting_staffid, $ebdc) or die(mysql_error());
+$row_getting_staffid        = mysql_fetch_assoc($getting_staffid);
+$totalRows_getting_staffid  = mysql_num_rows($getting_staffid);
+
+$staff_id = $row_getting_staffid['staff_id'];
+
+      if($totalRows_check_transaction_balance == 1){
+        //working fine
+      $transaction_made = $row_check_transaction_balance['transaction_made'];
+      $openingbalance   = $row_check_transaction_balance['openingbalance'];
+      $balance          = $row_check_transaction_balance['balance'];
+      
+      if($openingbalance==$transaction_made){
+        header(sprintf("Location: %s", "https://".$location."2172021"));
+      }
+      else if($customermoney > $openingbalance){
+        header(sprintf("Location: %s", "https://".$location."2172022"));
+      }
+      else if(($openingbalance==$balance) || ($customermoney<$openingbalance) || ($customermoney==$balance)){
+        $insertSQL = sprintf("INSERT INTO `transaction` (deposit_id, staff_id, customer_name, amount, rate, tran_type, transaction_date) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['deport_id'], "int"),
-                       GetSQLValueString($_SESSION['MM_Username'], "text"),
+                       GetSQLValueString($staff_id, "int"),
                        GetSQLValueString($_POST['Customername'], "text"),
-                       GetSQLValueString($_POST['Amount']/$_POST['rate'], "int"),
+                       GetSQLValueString($_POST['Amount']/$_POST['rate'], "numeric"),
                        GetSQLValueString($_POST['rate'], "int"),
                        GetSQLValueString($_POST['type'], "text"),
                        GetSQLValueString($today, "date"));
@@ -78,12 +101,11 @@ if($totalRows_tabs==1){
                           
                           header(sprintf("Location: %s", "https://".$location."2172020"));
                       }
-    
+      }
+      else{
+      header(sprintf("Location: %s", "https://".$location."2172020"));  
+      }
   }else{
-          header(sprintf("Location: %s", "https://".$location."2172020"));
+    header(sprintf("Location: %s", "https://".$location."7342018"));
   }
-}else{
-  header(sprintf("Location: %s", "https://".$location."7342018"));
-}
-
 ?>

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="stylesheet/css/ebdc.css">
 <link rel="stylesheet" href="stylesheet/css/bootstrap.min.css">
 <link rel="stylesheet" href="stylesheet/css/fam.css">
+<link rel="stylesheet" href="stylesheet/css/jqueryui.min.css">
 <title>EBDC</title>
 </head>
 <body ng-app="Ebdcapp">
@@ -30,10 +31,12 @@
 <script src="/js/angularjs/angularroute.js"></script>
 <script src="/js/angularjs/angularuirouter.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/jqueryui.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
 <script src="/js/shake.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/angularjs/ebdc_angular.js"></script>
+<script src="/js/angularjs/angular-sanitize.js"></script>
 <script src="/js/ebdc.js"></script>
+  
 </body>
 </html>

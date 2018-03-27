@@ -33,10 +33,9 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 $username     = $_SESSION['MM_Username'];
-$Centernumber = $_SESSION['MM_Centernumber']; 
-
+$Centernumber = $_SESSION['MM_Centernumber'];  
 mysql_select_db($database_ebdc, $ebdc);
-$query_userinfo = "SELECT staff.username, staff.fname, staff.lname FROM staff, center WHERE staff.center_id = center.id AND center.`number`='$Centernumber' AND staff.username='$username'";
+$query_userinfo = "SELECT staff.username, staff.fname, staff.lname, center.name FROM ebdc.staff, ebdc.center WHERE staff.center_id = center.id AND center.`number`='$Centernumber' AND staff.username='$username'";
 $userinfo = mysql_query($query_userinfo, $ebdc) or die(mysql_error());
 $row_userinfo = mysql_fetch_assoc($userinfo);
 $totalRows_userinfo = mysql_num_rows($userinfo);
@@ -51,6 +50,7 @@ $rows = array();
 $rows['fname']=$row_userinfo['fname'];
 $rows['lname']=$row_userinfo['lname'];
 $rows['username']=$row_userinfo['username'];
+$rows['centername']=$row_userinfo['name'];
 
 echo json_encode($rows)
 ?>

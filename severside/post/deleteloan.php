@@ -31,39 +31,16 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$laonid = $_POST['laonid'];
+$location     = "https://".$_SERVER['SERVER_NAME']."/#!/loan/Cash On Loan/";
 
-
-
-// ** Logout the current user. **
-$logoutAction = $_SERVER['PHP_SELF']."?doLogout=true";
-if ((isset($_SERVER['QUERY_STRING'])) && ($_SERVER['QUERY_STRING'] != "")){
-  $logoutAction .="&". htmlentities($_SERVER['QUERY_STRING']);
-}
-  
-  
-
-  //to fully log out a visitor we need to clear the session varialbles
-  $_SESSION['MM_Username'] = NULL;
-  $_SESSION['MM_UserGroup'] = NULL;
-  $_SESSION['MM_Centernumber'] = NULL;
-  $_SESSION['PrevUrl'] = NULL;
-  unset($_SESSION['MM_Username']);
-  unset($_SESSION['MM_UserGroup']);
-  unset($_SESSION['MM_Centernumber']);
-  unset($_SESSION['PrevUrl']);
-	
-  $logoutGoTo = "loginerror.php";
-  if($_GET['accesserrorcode']==2204){
-    $location = $_SERVER['SERVER_NAME'].'/#!/login/2204';
-    header("location: https://".$location);
-    
-    exit;
-  }
-  else if ($logoutGoTo) {
-    $location = $_SERVER['SERVER_NAME'].'/#!/login/2202';
-    header("location: https://".$location);
-    
-    exit;
-  }
+$insertSQL = sprintf("DELETE FROM `ebdc`.`loan` WHERE `loan_id`='$laonid'");
+                        mysql_select_db($database_ebdc, $ebdc);
+                        $Result1 = mysql_query($insertSQL, $ebdc)or die(mysql_error());
+                      if($Result1==1){
+                          header(sprintf("Location: %s", $location."9993"));
+                      }else{
+                          header(sprintf("Location: %s", $location."9994"));
+                      }
 
 ?>

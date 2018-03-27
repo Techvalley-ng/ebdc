@@ -6,17 +6,20 @@
                     <img src="image/Preloader_3.gif" class="img-fluid img-thumbnail rounded mx-auto d-block"></img>
                 </div>
                 <div class="row">
-                    <div class="col giving text-center font-weight-bold">TOTAL TRANSACTION FOR TODAY:</div>
+                    <div class="col giving text-center font-weight-bold">TOTAL TRANSACTION FOR TODAY:
+                    (OutGoing {{totalCash.totalCash + totaltransfar.totaltransfar1 | currency :totalCash.symbol1+' ':0}})
+                    (Incoming {{totalCash.totalCash2 + totaltransfar.totaltransfar2 | currency :totalCash.symbol2+' ':0}})
+                    </div>
                 </div>
                 
                 <div class="row">
                     <div class="col giving font-weight-bold">Sales In Cash:
-                    ({{totalCash.totalCash | currency :totalCash.symbol1:0}})
-                    ({{totalCash.totalCash2 | currency :totalCash.symbol2:0}})
+                    ({{totalCash.totalCash | currency :totalCash.symbol1+' ':0}})
+                    ({{totalCash.totalCash2 | currency :totalCash.symbol2+' ':0}})
                     </div>
                     <div class="col collecting font-weight-bold">Sales In Transfer:
-                    ({{totaltransfar.totaltransfar | currency :totalCash.symbol1:0}})
-                    ({{totaltransfar.totaltransfar2 | currency :totalCash.symbol2:0}}) 
+                        ({{totaltransfar.totaltransfar1 | currency :totaltransfar.symbol1+' ':0}})
+                        ({{totaltransfar.totaltransfar2 | currency :totaltransfar.symbol2+' ':0}}) 
                     </div>
                 </div>
                 
@@ -35,7 +38,7 @@
                         </tr>
                         </thead>
                         <tr ng-repeat="report in tabsreport">
-                            <td>{{report.name}}</td>
+                            <td>{{report.fname}} {{report.fname}}</td>
                             <td>
                                <div class="row" style="color:#ffffff">
                                     <div class="col bg-primary font-weight-bold">Buying</div>
@@ -45,13 +48,13 @@
                                <div class="row">
                                     <div class="col">{{report.buying}}</div>
                                     <div class="col">{{report.selling}}</div>
-                                    <div class="col">{{report.rate | currency :"":0}}</div>
+                                    <div class="col">{{report.rate}}</div>
                                </div>
                             </td>
-                            <td>&nbsp;&nbsp;{{report.amount | currency :report.symbol:0}}</td>
+                            <td>&nbsp;&nbsp;{{report.amount | currency :report.symbol+" "}}</td>
                             <td>{{report.customer_name}}</td>
                             <td>{{report.tran_type}}</td>
-                            <td>{{report.amount*report.rate | currency :report.sellingsymbol:0}}</td>
+                            <td>{{report.amount*report.rate | currency :report.sellingsymbol+" "}}</td>
                             
                         </tr>    
                 </table>

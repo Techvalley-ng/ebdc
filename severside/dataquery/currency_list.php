@@ -33,7 +33,10 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 $centernumber = $_SESSION['MM_Centernumber'];
 mysql_select_db($database_ebdc, $ebdc);
-$query_currency_list = "SELECT currency.currency_id,currency.name, currency.code, currency.symbol, CONCAT(staff.fname,' ', staff.lname) AS staff_add, currency.data_added FROM ebdc.currency, ebdc.staff, ebdc.center where currency.center_id = center.id AND center.number='$centernumber' AND staff.fname !='techvalley'";
+$query_currency_list = "SELECT currency.currency_id,currency.name, currency.code, currency.symbol, currency.data_added, concat(staff.fname,' ',staff.lname) AS staff_added
+FROM ebdc.currency, ebdc.staff, ebdc.center
+WHERE currency.staff_id = staff.staff_id AND staff.center_id = center.id AND center.number ='$centernumber' 
+ORDER BY currency.currency_id DESC";
 $currency_list = mysql_query($query_currency_list, $ebdc) or die(mysql_error());
 $row_currency_list = mysql_fetch_assoc($currency_list);
 $totalRows_currency_list = mysql_num_rows($currency_list);
@@ -46,6 +49,8 @@ do {
 } while ($row_currency_list = mysql_fetch_assoc($currency_list));
  
   echo json_encode($currency_listdata);
+  
+  
 ?>
 
 

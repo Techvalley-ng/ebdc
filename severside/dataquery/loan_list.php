@@ -32,38 +32,30 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$MM_Centernumber = $_SESSION['MM_Centernumber'];
+mysql_select_db($database_ebdc, $ebdc);
+$query_loanlist = "SELECT loan.loan_id,
+staff.fname,
+staff.lname,
+loan.personname,
+loan.loaninformation,
+loan.date_added
+FROM ebdc.loan, ebdc.staff, ebdc.center
+WHERE center.id = loan.center
+AND loan.staff_id = staff.staff_id
+AND center.`number` = '$MM_Centernumber'
+ORDER BY loan.loan_id DESC";
+$loanlist = mysql_query($query_loanlist, $ebdc) or die(mysql_error());
+$row_loanlist = mysql_fetch_assoc($loanlist);
+$totalRows_loanlist = mysql_num_rows($loanlist);
 
+$loanlistdata = array();
 
-// ** Logout the current user. **
-$logoutAction = $_SERVER['PHP_SELF']."?doLogout=true";
-if ((isset($_SERVER['QUERY_STRING'])) && ($_SERVER['QUERY_STRING'] != "")){
-  $logoutAction .="&". htmlentities($_SERVER['QUERY_STRING']);
-}
-  
-  
-
-  //to fully log out a visitor we need to clear the session varialbles
-  $_SESSION['MM_Username'] = NULL;
-  $_SESSION['MM_UserGroup'] = NULL;
-  $_SESSION['MM_Centernumber'] = NULL;
-  $_SESSION['PrevUrl'] = NULL;
-  unset($_SESSION['MM_Username']);
-  unset($_SESSION['MM_UserGroup']);
-  unset($_SESSION['MM_Centernumber']);
-  unset($_SESSION['PrevUrl']);
-	
-  $logoutGoTo = "loginerror.php";
-  if($_GET['accesserrorcode']==2204){
-    $location = $_SERVER['SERVER_NAME'].'/#!/login/2204';
-    header("location: https://".$location);
-    
-    exit;
-  }
-  else if ($logoutGoTo) {
-    $location = $_SERVER['SERVER_NAME'].'/#!/login/2202';
-    header("location: https://".$location);
-    
-    exit;
-  }
+do {
+  $loanlistdata[] = $row_loanlist;
+  $number++;
+} while ($row_loanlist = mysql_fetch_assoc($loanlist));
+ 
+  echo json_encode($loanlistdata);
 
 ?>

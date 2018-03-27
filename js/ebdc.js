@@ -15,6 +15,7 @@ function login (errorcode=0){
 		onfocusout: false,
 		focusInvalid: false,
 		focusCleanup: true,
+		
 		rules: {
 			username: {
 				required: true,
@@ -56,13 +57,21 @@ function login (errorcode=0){
         		$(".login-header").html("Login failed").css("background-color","#cc0000");
         		
        }
+       else if(errorcode==2203){
+                
+        		$(".login-header").html("Your Bills is due").css("background-color","#cc0000");
+        		$('.login').shake();
+        		
+       }
        else if(errorcode==2202){
                 
         		$(".login-header").html("Logout successful").css("background-color","#cc0000");
         		$('.login').shake();
         		
-        		
-        		
+       }
+       else if(errorcode==2204){
+       	$(".login-header").html("ACCESS REVOKE PLEASE LOGIN AGAIN").css("background-color","#cc0000");
+        $('.login').shake();
        }
     setTimeout(function(){
     	$(".login-header").html("ebdc MIS").css("background-color","#28d");
@@ -119,7 +128,57 @@ function codecheck(code){
 	}else if (code== 5557){
 		$(".tem-tiltle").html("YOU HAVE AN ERROR WHILE ADDING A NEW CURRENCY").css("background-color","#cc0000");
         $('.tem-tiltle').shake();
+	}else if (code== 5556){
+		$(".tem-tiltle").html("DUPLICATE ENTRY OF CURRENCY").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}else if(code==8888){
+		$(".tem-tiltle").html("THIS MARCH HAS ALREADY BEEN DONE").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}else if (code==8881){
+		$(".tem-tiltle").html("YOU HAVE SUCCESSFULLY ADDED A NEW CURRENCY MARCH ").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
 	}
+	else if (code==8882){
+		$(".tem-tiltle").html("ERROR WHILE ADDING NEW MARCH").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+        
+	}else if (code==7777){
+		$("#amounterror").html("YOU HAVE SUCCESSFULLY CHECK-IN AN AMOUNT INTO THE SELECTED TRANSACTION").css("background-color","#cc0000");
+        $('#amounterror').shake();
+	}else if (code==7778){
+		$("#amounterror").html("ERROR WHILE CHECKING-IN").css("background-color","#cc0000");
+        $('#amounterror').shake();
+	}else if (code==7779){
+		$("#amounterror").html("ERROR WHILE CHECKING-OUT").css("background-color","#cc0000");
+        $('#amounterror').shake();
+	}else if (code==7710){
+		$("#amounterror").html("ERROR CANT UPDATE THE DEPORT TABLE").css("background-color","#cc0000");
+        $('#amounterror').shake();
+	}else if (code==7711){
+		$("#amounterror").html("YOU HAVE SUCCESSFULLY CHECK-OUT THE AMOUNT FOR THE SELECTED TRANSACTION").css("background-color","#cc0000");
+        $('#amounterror').shake();
+	}else if (code==7712){
+		$("#amounterror").html("YOU HAVE SUCCESSFULLY CHECK-IN THE AMOUNT FOR THE SELECTED TRANSACTION").css("background-color","#cc0000");
+        $('#amounterror').shake();
+	}
+	else if (code==9991){
+		$(".tem-tiltle").html("YOU HAVE SUCCESSFULLY ADDED A NEW LOAN").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}
+	else if (code==9992){
+		$(".tem-tiltle").html("ERROR WHILE ADDING NEW LOAN").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}
+	else if (code==9993){
+		$(".tem-tiltle").html("YOU HAVE SUCCESSFULLY DELETE A LOAN").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}
+	else if (code==9994){
+		$(".tem-tiltle").html("ERROR WHILE DELETING NEW LOAN").css("background-color","#cc0000");
+        $('.tem-tiltle').shake();
+	}
+	
+	
 }
 
 function resetstyle(wsalect,htmldata,bgcolor){
@@ -128,3 +187,44 @@ function resetstyle(wsalect,htmldata,bgcolor){
     }, 10000); 
 }
 
+function dateselector (){
+	  $( function() {
+    var dateFormat = "yy-mm-dd",
+      from = $("#from")
+        .datepicker({
+          dateFormat: 'yy-mm-dd',
+          changeMonth: true,
+          numberOfMonths: 1
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        numberOfMonths: 1
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+}
+
+function reminderofloan(){
+	// setInterval(function(){
+	// 	window.alert("WE WISH TO REMIND ON YOUR LOANS IF THEY HAVE NOT BEEN COLLECTED, IF YES PLEASE DELETE IT FROM THE LOAN LIST ");	
+	// },10000);
+	
+}
+reminderofloan();

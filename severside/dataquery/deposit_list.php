@@ -31,39 +31,28 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$MM_Centernumber = $_SESSION['MM_Centernumber'];
+mysql_select_db($database_ebdc, $ebdc);
+$query_deporsit_list = "SELECT check_in_check_out_history.match_name, 
+check_in_check_out_history.match_name,
+check_in_check_out_history.statues,
+check_in_check_out_history.symbol,
+check_in_check_out_history.amount,
+check_in_check_out_history.staff_name
+FROM ebdc.check_in_check_out_history, ebdc.deposit, ebdc.staff, ebdc.center
+WHERE check_in_check_out_history.deposit_id = deposit.id AND deposit.staff_id = staff.staff_id AND staff.center_id = center.id
+AND center.number = '$MM_Centernumber' 
+order by check_in_check_out_history.id DESC;";
+$deporsit_list = mysql_query($query_deporsit_list, $ebdc) or die(mysql_error());
+$row_deporsit_list = mysql_fetch_assoc($deporsit_list);
+$totalRows_deporsit_list = mysql_num_rows($deporsit_list);
 
+$deporsit_listdata = array();
 
-
-// ** Logout the current user. **
-$logoutAction = $_SERVER['PHP_SELF']."?doLogout=true";
-if ((isset($_SERVER['QUERY_STRING'])) && ($_SERVER['QUERY_STRING'] != "")){
-  $logoutAction .="&". htmlentities($_SERVER['QUERY_STRING']);
-}
-  
-  
-
-  //to fully log out a visitor we need to clear the session varialbles
-  $_SESSION['MM_Username'] = NULL;
-  $_SESSION['MM_UserGroup'] = NULL;
-  $_SESSION['MM_Centernumber'] = NULL;
-  $_SESSION['PrevUrl'] = NULL;
-  unset($_SESSION['MM_Username']);
-  unset($_SESSION['MM_UserGroup']);
-  unset($_SESSION['MM_Centernumber']);
-  unset($_SESSION['PrevUrl']);
-	
-  $logoutGoTo = "loginerror.php";
-  if($_GET['accesserrorcode']==2204){
-    $location = $_SERVER['SERVER_NAME'].'/#!/login/2204';
-    header("location: https://".$location);
-    
-    exit;
-  }
-  else if ($logoutGoTo) {
-    $location = $_SERVER['SERVER_NAME'].'/#!/login/2202';
-    header("location: https://".$location);
-    
-    exit;
-  }
-
+do {
+  $deporsit_listdata[] = $row_deporsit_list;
+  $number++;
+} while ($row_deporsit_list = mysql_fetch_assoc($deporsit_list));
+ 
+  echo json_encode($deporsit_listdata);
 ?>

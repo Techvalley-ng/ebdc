@@ -6,26 +6,20 @@
                     <a href="/#!/home/Dashboard" class="mylink">  
                     <div class="panel-tabs">Dashboard</div>
                     </a>
-                    <a href="/#!/addcurrency/Add New Currency" class="mylink">  
+                    <a href="/#!/addcurrency/Add New Currency/" class="mylink">  
                     <div class="panel-tabs">Add New Currency</div>
                     </a>
-                    <a href="/#!/matchcurrency" class="mylink">  
+                    <a href="/#!/matchcurrency/Match Currency/" class="mylink">  
                     <div class="panel-tabs">Match Currency</div>
                     </a>
-                    <a href="/#!/generalreport" class="mylink">  
-                    <div class="panel-tabs">General Reports</div>
+                    <a href="/#!/makedeposit/Make Deport/" class="mylink">  
+                    <div class="panel-tabs">Make Deposit</div>
                     </a>
-                    <a href="/#!/transactionhistroy" class="mylink">  
-                    <div class="panel-tabs">Transaction History</div>
+                    <a href="/#!/generalreport/Reports" class="mylink">  
+                    <div class="panel-tabs">Transaction Reports</div>
                     </a>
-                    <a href="/#!/makedeport" class="mylink">  
-                    <div class="panel-tabs">Make Deports</div>
-                    </a>
-                    <a href="/#!/deportsreports" class="mylink">  
-                    <div class="panel-tabs">Deports Reports </div>
-                    </a>
-                    <a href="/#!/outgoingcash" class="mylink">  
-                    <div class="panel-tabs">OutGoing Cash</div>
+                    <a href="/#!/loan/Cash On Loan/" class="mylink">  
+                    <div class="panel-tabs">Loans Cash</div>
                     </a>
                 </div>
                
@@ -35,7 +29,7 @@
                                <div class="tem-tiltle text-center font-weight-bold text-nowrap">
                                    Add New Currency 
                                 </div>
-                            <form name="addcurrency" method="POST" action="severside/post/processnewcurrency.php">    
+                            <form name="addcurrency" method="POST" action="severside/post/processnewcurrency.php" id="addnewcurrecny">    
                         <div class="row">
                                  <div class="col-md-6">
                                   <div class="form-group" style="margin-top:2em;">
@@ -48,7 +42,6 @@
                                   </div>   
                                   <div class="col-md-6">
                                       <button style="margin-top:1em;" type="submit" style="cursor:pointer" class="btn btn-primary btn-block btn-lg">Add New Currency</button>
-                                      <button type="button" style="cursor:pointer" class="btn btn-primary btn-block btn-lg">Reset</button>
                                   </div>
                               
                         </div>
@@ -80,10 +73,10 @@
                                         </th>
                                     </tr>
                                     <tr ng-repeat="currency_list in currency_list | limitTo:8 | orderBy:'-data_added'">
-                                        <td>{{currency_list.name}} {{currency_list.currency_id}}</td>
+                                        <td>{{currency_list.name}}</td>
                                         <td>{{currency_list.code}}</td>
                                         <td>{{currency_list.symbol}}</td>
-                                        <td>{{currency_list.staff_add}}</td>
+                                        <td>{{currency_list.staff_added}}</td>
                                         <td>{{currency_list.data_added}}</td>
                                     </tr>
                                 </table>    

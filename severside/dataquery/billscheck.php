@@ -1,4 +1,5 @@
 <?php require_once('../Connections/ebdc.php'); ?>
+<?php session_start(); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
@@ -31,9 +32,9 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-
+$centernumber = $_SESSION['MM_Centernumber'];
 mysql_select_db($database_ebdc, $ebdc);
-$query_billscheck = "SELECT bill.due_date FROM bill, center WHERE bill.center_id = center.id AND center.`number` =2308 ORDER BY bill.id DESC LIMIT 0,1";
+$query_billscheck = "SELECT bill.due_date FROM bill, center WHERE bill.center_id = center.id AND center.`number` ='$centernumber' ORDER BY bill.id DESC LIMIT 0,1";
 $billscheck = mysql_query($query_billscheck, $ebdc) or die(mysql_error());
 $row_billscheck = mysql_fetch_assoc($billscheck);
 $totalRows_billscheck = mysql_num_rows($billscheck);
@@ -44,8 +45,9 @@ $today =  date('Y-m-d');
 
 if(($due_date==$today)||($due_date<$today)){
   
-  //your sub is due
-  echo "your sub is over";
+  //your sub is due https://ebdc-abwali.c9users.io/#!/login/
+  $location = $_SERVER['SERVER_NAME'].'/#!/login/2203';
+  header("location: https://".$location);
   
 }else{
   //you still have sub

@@ -31,9 +31,43 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
-
+$deposit_id = $_GET['deposit_id'];
+$MM_Centernumber = $_SESSION['MM_Centernumber'];
 mysql_select_db($database_ebdc, $ebdc);
-$query_todayreport = "SELECT  CONCAT(staff.fname,' ', staff.lname) AS name, (`currency`.name) AS selling, `currency`.symbol, (SELECT currency.name from currency where currency.currency_id = marched_currency.currency_id_incoming) AS buying,(SELECT currency.symbol from currency where currency.currency_id = marched_currency.currency_id_incoming) AS sellingsymbol, `transaction`.rate, `transaction`.customer_name, `transaction`.tran_type, (`transaction`.amount) AS amount FROM staff, center, `transaction`, `currency`, marched_currency, deposit WHERE staff.center_id = center.id AND center.`number`=2308 AND `transaction`.username = staff.username AND `transaction`.username != 'techvalley' AND `currency`.currency_id = marched_currency.currency_id_outgoing AND marched_currency.marched_id = deposit.marched_id AND deposit.id = `transaction`.deposit_id AND `transaction`.deposit_id=6";
+$query_todayreport = "SELECT (SELECT staff.fname
+FROM ebdc.staff, ebdc.deposit
+WHERE staff.staff_id = `transaction`.staff_id
+AND deposit.id = '$deposit_id') AS fname,
+(SELECT staff.lname
+FROM ebdc.staff, ebdc.deposit
+WHERE staff.staff_id = `transaction`.staff_id
+AND deposit.id = '$deposit_id') AS lname,
+(currency.`name`) AS selling,
+currency.symbol,
+(SELECT currency.name 
+FROM ebdc.currency,ebdc.marched_currency, ebdc.deposit 
+WHERE currency.currency_id = marched_currency.currency_id_incoming AND deposit.marched_id = marched_currency.marched_id AND deposit.id='$deposit_id') AS buying,
+(SELECT currency.symbol 
+FROM ebdc.currency,ebdc.marched_currency, ebdc.deposit 
+WHERE currency.currency_id = marched_currency.currency_id_incoming AND deposit.marched_id = marched_currency.marched_id AND deposit.id='$deposit_id') AS sellingsymbol,
+`transaction`.rate, 
+`transaction`.customer_name, 
+`transaction`.tran_type, 
+(`transaction`.amount) AS amount 
+FROM ebdc.staff, 
+ebdc.center, 
+ebdc.`transaction`,
+ebdc.deposit,
+ebdc.marched_currency,
+ebdc.currency 
+WHERE staff.center_id = center.id
+AND center.`number` = '$MM_Centernumber'
+AND `transaction`.deposit_id = deposit.id
+AND deposit.marched_id = marched_currency.marched_id
+AND marched_currency.currency_id_outgoing = currency.currency_id
+AND staff.staff_id = deposit.staff_id
+AND deposit.id='$deposit_id'
+ORDER BY `transaction`.id DESC";
 $todayreport = mysql_query($query_todayreport, $ebdc) or die(mysql_error());
 $row_todayreport = mysql_fetch_assoc($todayreport);
 $totalRows_todayreport = mysql_num_rows($todayreport);

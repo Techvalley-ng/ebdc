@@ -32,46 +32,31 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+echo $outgoing     = $_POST['outgoing'];
+echo $incoming     = $_POST['incoming'];
+$location     = "https://".$_SERVER['SERVER_NAME']."/#!/matchcurrency/Match Currency/";    
+$today        = date ("Y-m-d");
+$username     = $_SESSION['MM_Username']; 
+$centernumber =$_SESSION['MM_Centernumber']; 
+
 mysql_select_db($database_ebdc, $ebdc);
-$query_todayreport = "";
-$todayreport = mysql_query($query_todayreport, $ebdc) or die(mysql_error());
-$row_todayreport = mysql_fetch_assoc($todayreport);
-$totalRows_todayreport = mysql_num_rows($todayreport);
+$query_checking_old_march     = "SELECT * FROM ebdc.marched_currency 
+WHERE currency_id_outgoing ='$outgoing' AND currency_id_incoming ='$incoming'";
+$checking_old_march           = mysql_query($query_checking_old_march, $ebdc) or die(mysql_error());
+$row_checking_old_march       = mysql_fetch_assoc($checking_old_march);
+echo $totalRows_checking_old_march = mysql_num_rows($checking_old_march);
 
-/severside/dataquery/TransactionReport.php?martch_id=34datefrom=2018-03-24dateto=2018-03-24
+mysql_select_db($database_ebdc, $ebdc);
+$query_getting_staffid      = "SELECT staff.staff_id 
+FROM ebdc.staff, ebdc.center  
+WHERE username='$username' AND staff.center_id=center.id AND center.number='$centernumber'";
+$getting_staffid            = mysql_query($query_getting_staffid, $ebdc) or die(mysql_error());
+$row_getting_staffid        = mysql_fetch_assoc($getting_staffid);
+$totalRows_getting_staffid  = mysql_num_rows($getting_staffid);
 
-$todayreportdata = array();
+$staff_id = $row_getting_staffid['staff_id'];
 
-do {
-  $todayreportdata[] = $row_todayreport;
-  $number++;
-} while ($row_todayreport = mysql_fetch_assoc($todayreport));
- 
-  echo json_encode($todayreportdata);
-?>
-$today              = date ("Y-m-d");
-$location           = $_SERVER['SERVER_NAME']."/".$_POST['url'];
-$insertSQL = sprintf("INSERT INTO `currency` (`staff_id`, `name`, `code`, `symbol`, `data_added`) VALUES (%s,%s,%s,%s,%s)",
-                      GetSQLValueString($stafs_id, "int"),
-                      GetSQLValueString($result_explode[0], "text"),
-                      GetSQLValueString($result_explode[1], "text"),
-                      GetSQLValueString($result_explode[2], "text"),
-                      GetSQLValueString($today, "date"));
-                        mysql_select_db($database_ebdc, $ebdc);
-                        $Result1 = mysql_query($insertSQL, $ebdc)or die(mysql_error());
-                        
-                      if($Result1==1){
-                            header(sprintf("Location: %s", "https://".$location."5555"));
-                            
-                        }else {
-                            header(sprintf("Location: %s", "https://".$location."5557"));
-                        } 
-                                    </tr>
-        $_SESSION['MM_Username']        = $loginUsername;
-    $_SESSION['MM_Centernumber']    = $centernumber;
-    $_SESSION['MM_UserGroup']       = $loginStrGroup;	
-    
-      if($totalRows_checking_old_march == 0){
+  if($totalRows_checking_old_march == 0){
         $insertSQL = sprintf("INSERT INTO `marched_currency` (`currency_id_outgoing`, `currency_id_incoming`, `staff_id`, `date_added`) VALUES (%s,%s,%s,%s)",
                       GetSQLValueString($outgoing, "int"),
                       GetSQLValueString($incoming, "int"),
@@ -89,6 +74,8 @@ $insertSQL = sprintf("INSERT INTO `currency` (`staff_id`, `name`, `code`, `symbo
     }else {
         header(sprintf("Location: %s", $location."8888"));
     }
-    
-INSERT INTO `ebdc`.`deposit` (`marched_id`, `staff_id`, `amount`, `date`) VALUES ('21', '20', '29', '3434343');
-    
+
+
+  
+?>
+

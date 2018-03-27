@@ -7,26 +7,20 @@
                     <a href="/#!/home/Dashboard" class="mylink">  
                     <div class="panel-tabs">Dashboard</div>
                     </a>
-                    <a href="/#!/addcurrency" class="mylink">  
+                    <a href="/#!/addcurrency/Add New Currency/" class="mylink">  
                     <div class="panel-tabs">Add New Currency</div>
                     </a>
-                    <a href="/#!/matchcurrency" class="mylink">  
+                    <a href="/#!/matchcurrency/Match Currency/" class="mylink">  
                     <div class="panel-tabs">Match Currency</div>
                     </a>
-                    <a href="/#!/generalreport" class="mylink">  
-                    <div class="panel-tabs">General Reports</div>
+                    <a href="/#!/makedeposit/Make Deport/" class="mylink">  
+                    <div class="panel-tabs">Make Deposit</div>
                     </a>
-                    <a href="/#!/transactionhistroy" class="mylink">  
-                    <div class="panel-tabs">Transaction History</div>
+                    <a href="/#!/generalreport/Reports" class="mylink">  
+                    <div class="panel-tabs">Transaction Reports</div>
                     </a>
-                    <a href="/#!/makedeport" class="mylink">  
-                    <div class="panel-tabs">Make Deports</div>
-                    </a>
-                    <a href="/#!/deportsreports" class="mylink">  
-                    <div class="panel-tabs">Deports Reports </div>
-                    </a>
-                    <a href="/#!/outgoingcash" class="mylink">  
-                    <div class="panel-tabs">OutGoing Cash</div>
+                    <a href="/#!/loan/Cash On Loan/" class="mylink">  
+                    <div class="panel-tabs">Loans Cash</div>
                     </a>
                 </div>
                 <div class="col">
@@ -41,11 +35,11 @@
                                 </div>
                                 <div class="row">
                                  <div class="col giving text-left text-nowrap font-weight-bold">
-                                     You are Collecting in: <span>{{incoming}}</span> <span id="ct">{{collecting | currency :"":0 }}</span>
+                                     You are Collecting (in): <span id="ct">{{collecting | currency :incoming+" " }}</span>
                                       
                                  </div>
                                  <div class="col collecting text-right text-nowrap font-weight-bold">
-                                      You are giving out : <span>{{outgoing}}</span> <span>{{collecting/rate | currency :"":0 }}</span>
+                                      You are giving (out): <span>{{collecting/rate | currency:outgoing+" "  }}</span>
                                  </div>
                              </div>
                               
@@ -96,8 +90,8 @@
                                       </a>
                                   </div>
                            </div>
-                               <input type="hidden" name="deport_id" value="{{deport_id}}">
-                               <input type="hidden" name="url" value="#!/maketransaction/{{deport_id}}/{{outgoing}}/{{incoming}}/">
+                               <input type="hidden" name="deport_id" value="{{deposit_id}}">
+                               <input type="hidden" name="url" value="#!/maketransaction/Make Transaction/{{deposit_id}}/{{outgoing}}/{{incoming}}/">
                            </form>
                        </div>
                    </div>

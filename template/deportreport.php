@@ -31,29 +31,23 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col panel">
-                    <a href="/#!/home" class="mylink">  
+                   <a href="/#!/home/Dashboard" class="mylink">  
                     <div class="panel-tabs">Dashboard</div>
                     </a>
-                    <a href="/#!/addcurrency" class="mylink">  
+                    <a href="/#!/addcurrency/Add New Currency/" class="mylink">  
                     <div class="panel-tabs">Add New Currency</div>
                     </a>
-                    <a href="/#!/matchcurrency" class="mylink">  
+                    <a href="/#!/matchcurrency/Match Currency/" class="mylink">  
                     <div class="panel-tabs">Match Currency</div>
                     </a>
-                    <a href="/#!/generalreport" class="mylink">  
-                    <div class="panel-tabs">General Reports</div>
+                    <a href="/#!/makedeposit/Make Deport/" class="mylink">  
+                    <div class="panel-tabs">Make Deposit</div>
                     </a>
-                    <a href="/#!/transactionhistroy" class="mylink">  
-                    <div class="panel-tabs">Transaction History</div>
+                    <a href="/#!/generalreport/Reports" class="mylink">  
+                    <div class="panel-tabs">Transaction Reports</div>
                     </a>
-                    <a href="/#!/makedeport" class="mylink">  
-                    <div class="panel-tabs">Make Deports</div>
-                    </a>
-                    <a href="/#!/deportsreports" class="mylink">  
-                    <div class="panel-tabs">Deports Reports </div>
-                    </a>
-                    <a href="/#!/outgoingcash" class="mylink">  
-                    <div class="panel-tabs">OutGoing Cash</div>
+                    <a href="/#!/loan/Cash On Loan/" class="mylink">  
+                    <div class="panel-tabs">Loans Cash</div>
                     </a>
                 </div>
                  <div class="col">

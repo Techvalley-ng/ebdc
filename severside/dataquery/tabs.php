@@ -32,18 +32,32 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$datatocheck="Transfar";
-$cent = $_SESSION['MM_Centernumber'];
+$datatocheck="Transfer";
+$MM_Centernumber = $_SESSION['MM_Centernumber'];
 mysql_select_db($database_ebdc, $ebdc);
-$query_tabs = "SELECT SUM(transaction.amount) AS transaction_made, (deposit.amount) AS openingbalance, (deposit.amount-SUM(transaction.amount)) AS balance, currency.name, (SELECT currency.code from currency where currency.currency_id = marched_currency.currency_id_incoming) AS incoming, (currency.code) AS outgoing,currency.symbol, (deposit.id) AS deposit_id, (transaction.id) AS transaction_id FROM `transaction`, deposit, marched_currency, `currency`, center WHERE `transaction`.deposit_id = deposit.id AND marched_currency.marched_id = deposit.marched_id AND marched_currency.currency_id_outgoing = `currency`.currency_id AND `currency`.center_id = center.id AND center.`number`='$cent' AND transaction.tran_type!='$datatocheck' GROUP BY `transaction`.deposit_id";
+$query_tabs = "SELECT SUM(transaction.amount) AS transaction_made,
+(deposit.amount) AS openingbalance,
+(deposit.amount-SUM(transaction.amount)) AS balance,
+currency.`name`,
+currency.symbol,
+(currency.code) AS outgoing,
+(deposit.id) AS deposit_id, 
+(transaction.id) AS transaction_id,
+(SELECT currency.code from ebdc.currency where currency.currency_id = marched_currency.currency_id_incoming) AS incoming 
+FROM ebdc.transaction,
+ebdc.deposit,
+ebdc.marched_currency,
+ebdc.staff,
+ebdc.center,ebdc.currency
+WHERE transaction.deposit_id = deposit.id 
+AND deposit.marched_id = marched_currency.marched_id
+AND deposit.staff_id = staff.staff_id AND staff.center_id = center.id AND center.number = '$MM_Centernumber'
+AND marched_currency.currency_id_outgoing = currency.currency_id
+AND transaction.tran_type!='$datatocheck' GROUP BY `transaction`.deposit_id";
 $tabs = mysql_query($query_tabs, $ebdc) or die(mysql_error()); 
 $row_tabs = mysql_fetch_assoc($tabs);
 
-// $tabsdata = array();
-// while($row_tabsdatainfo = mysql_fetch_assoc($tabs)) {
-//     $tabsdata[] = $row_tabsdatainfo;
-// }
-// echo json_encode($tabsdata);
+
 
 $tabsdata = array();
 
